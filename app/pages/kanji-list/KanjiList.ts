@@ -1,11 +1,20 @@
 import {Page} from 'ionic-framework/ionic';
+import {KanjiService} from "../../services/kanji.service";
+//import Kanji = mm.Kanji;
 
 
 @Page({
-  templateUrl: 'build/pages/page1/kanji-list.html',
+    templateUrl: 'build/pages/kanji-list/kanji-list.html',
 })
 export class KanjiList {
-  constructor() {
+    //public kanjis:Kanji[];
 
-  }
+    //constructor(public kanjiService:KanjiService) {
+    //    this.kanjis = [];
+    //    kanjiService.getKanjiList().then((kanjis:Kanji[])=> {
+    //        this.kanjis = kanjis;
+    //    });
+    //}
+    constructor() {
+    }
 }
