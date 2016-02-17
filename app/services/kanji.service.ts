@@ -1,9 +1,17 @@
 /// <reference path="../../typings/tsd.d.ts" />
 ///<reference path="../mm/mm.d.ts" />
+///<reference path="../config/config.d.ts" />
 
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
 import {LocalStorage} from 'angular2-local-storage/local_storage';
+import Kanji = mm.Kanji;
+import {Response} from 'angular2/http';
+import {Observable} from "rxjs/Rx";
+import IDiffResult = JsDiff.IDiffResult;
+import {ConfigService} from "../config/config";
+import Config = config.Config;
+import * as _ from 'lodash';
 
 class KanjiKana {
     kanji:string;
@@ -12,48 +20,35 @@ class KanjiKana {
 
 @Injectable()
 export class KanjiService {
-    $q:IQService;
-    $ionicLoading:IonicLoadingService;
+    private config:Config;
 
     constructor(public http:Http,
-                public config:config.Config,
-                public localStorage:LocalStorage,
-                $q:Q,
-                $ionicLoading:IonicLoadingService) {
+                public configService:ConfigService,
+                public localStorage:LocalStorage) {
         this.http = http;
-        this.config = config;
+        this.config = configService.getConfig();
         this.localStorage = localStorage;
-        this.$q = $q;
-        this.$ionicLoading = $ionicLoading;
     }
 
-    public getKanjiList():IPromise<Kanji[]> {
-        var kanjis:Kanji[] = this.localStorage.get<Kanji[]>('kanji-list');
+    public getKanjiList():Observable<Kanji[]> {
+        var kanjis:Kanji[] = this.localStorage.getObject('kanji-list');
 
-        if (kanjis) {
+        if (!_.isEmpty(kanjis)) {
             console.log("Kanji list found in localstorage (%d)", kanjis.length);
-            return this.$q.when<Kanji[]>(kanjis);
+            return Observable.of(kanjis);
         }
 
         var dataUrl:string = this.config.kanji.dataUrl;
 
         // Open loading popin
-        this.$ionicLoading.show();
+        //this.$ionicLoading.show();
 
-        return this.http.get<Kanji[]>(dataUrl)
-            .then((res)=> {
-                // Close Loading popin
-                this.$ionicLoading.hide();
-
-                var kanjis:Kanji[] = res.data;
+        return this.http.get(dataUrl)
+            .map((res:Response) => {
+                var kanjis:Kanji[] = res.json();
                 console.log("%d kanjis read from %s", kanjis.length, dataUrl);
-                this.localStorage.set('kanji-list', kanjis);
+                this.localStorage.setObject('kanji-list', kanjis);
                 return kanjis;
-            })
-            .catch((err:Error)=> {
-                console.log(err);
-                this.$ionicLoading.hide();
-                return [];
             });
     }
 

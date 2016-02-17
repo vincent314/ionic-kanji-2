@@ -1,15 +1,15 @@
 <ion-navbar *navbar>
-  <ion-title>Tab 1</ion-title>
+    <ion-title>Liste des Kanjis</ion-title>
 </ion-navbar>
 
 <ion-content padding class="page1">
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>www/app/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+            <ion-list can-swipe="true">
+                <ion-item *ngFor="#kanji of kanjis" class="item-thumbnail-left">
+                    <ion-avatar item-left>
+                        <h1>{{ kanji.kanji }}</h1>
+                    </ion-avatar>
+                    <p>{{ kanji.meaning }}</p>
+                    <h2>{{ kanji.readings.join(', ') }}</h2>
+                </ion-item>
+            </ion-list>
 </ion-content>
