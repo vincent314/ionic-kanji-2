@@ -2,8 +2,8 @@ import {App, Platform} from 'ionic-framework/ionic';
 import {TabsPage} from './pages/tabs/tabs';
 import {KanjiService} from './services/kanji.service';
 import {ConfigService} from './config/config';
-import {LocalStorage} from 'angular2-local-storage/local_storage'
-import {HTTP_PROVIDERS} from 'angular2/http'
+import {LocalStorage} from 'angular2-local-storage/local_storage';
+import {HTTP_PROVIDERS} from 'angular2/http';
 
 // https://angular.io/docs/ts/latest/api/core/Type-interface.html
 import {Type} from 'angular2/core';

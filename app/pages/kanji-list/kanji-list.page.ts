@@ -1,19 +1,24 @@
 import {Page} from 'ionic-framework/ionic';
 import {KanjiService} from "../../services/kanji.service";
 import Kanji = mm.Kanji;
-import {TranslatePipe} from 'angular2-translate';
+import {NavController} from "ionic-framework/ionic";
+import {KanjiDetailsPage} from "../kanji-details/kanji-details.page";
 
 @Page({
     templateUrl: 'build/pages/kanji-list/kanji-list.html',
-    pipes:[TranslatePipe]
 })
-export class KanjiList {
+export class KanjiListPage {
     public kanjis:Kanji[];
 
-    constructor(public kanjiService:KanjiService) {
+    constructor(public kanjiService:KanjiService, public nav:NavController) {
         this.kanjis = [];
         kanjiService.getKanjiList().subscribe((kanjis:Kanji[])=> {
             this.kanjis = kanjis;
         });
+    }
+
+    public onDetails(kanji:Kanji):void{
+        console.log(kanji.kanji);
+        this.nav.push(KanjiDetailsPage,{kanji:kanji});
     }
 }
