@@ -1,7 +1,40 @@
 <ion-navbar *navbar>
-    <ion-title>Liste des Kanjis</ion-title>
+    <ion-title>Kanji {{kanji.kanji}}</ion-title>
 </ion-navbar>
 
 <ion-content padding class="kanji-details">
-    {{kanji.kanji}}
+    <ion-card>
+        <ion-card-header>
+
+            <div class="row">
+                <div class="col">
+                    <h1>{{ kanji.kanji }}</h1>
+                    <h3>{{ kanji.readings.join(', ') }}</h3>
+                </div>
+                <div class="col">
+                    <p>
+                        <em>{{ kanji.comment }}</em>
+                    </p>
+                    <p>{{ kanji.meaning }}</p>
+                </div>
+            </div>
+
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item *ngFor="#vocabulary of kanji.vocabulary">
+                    <div class="row">
+                        <div class="col">
+                            {{vocabulary.japanese}}
+                            <!--<span class="text-large"-->
+                                  <!--ng-bind-html="renderWithFurigana(vocabulary.japanese, vocabulary.reading)"></span>-->
+                        </div>
+                        <div class="col">
+                            <p>{{ vocabulary.meaning }}</p>
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
