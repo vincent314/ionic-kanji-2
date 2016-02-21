@@ -5,19 +5,32 @@
 <ion-content padding class="kanji-details">
     <ion-card>
         <ion-card-header text-wrap>
-            <h1>{{ kanji.kanji }}</h1>
-            <h3>{{ kanji.readings.join(', ') }}</h3>
-            <p>
-                <em>{{ kanji.comment }}</em>
-            </p>
-            <p>{{ kanji.meaning }}</p>
+            <ion-row>
+                <ion-col width-33>
+                    <h1>{{ kanji.kanji }}</h1>
+                    <h3>{{ kanji.readings.join(', ') }}</h3>
+                </ion-col>
+                <ion-col>
+                    <p>
+                        <em>{{ kanji.comment }}</em>
+                    </p>
+                    <p>{{ kanji.meaning }}</p>
+                </ion-col>
+            </ion-row>
         </ion-card-header>
         <ion-card-content>
             <ion-list>
                 <ion-item *ngFor="#vocabulary of kanji.vocabulary" text-wrap>
-                    <div [innerHtml]="renderWithFurigana(vocabulary.reading,vocabulary.japanese)" class="col">
-                    </div>
-                    <p>{{ vocabulary.meaning }}</p>
+                    <ion-row>
+                        <ion-col width-33>
+                            <div class="text-large"
+                                 [innerHtml]="renderWithFurigana(vocabulary.reading,vocabulary.japanese)">
+                            </div>
+                        </ion-col>
+                        <ion-col>
+                            <p>{{ vocabulary.meaning }}</p>
+                        </ion-col>
+                    </ion-row>
                 </ion-item>
             </ion-list>
         </ion-card-content>
