@@ -4,7 +4,7 @@
 
 <ion-content padding class="kanji-list">
             <ion-list can-swipe="true">
-                <ion-item *ngFor="#kanji of kanjis" (click)="onDetails(kanji)">
+                <ion-item *ngFor="#kanji of kanjis" (click)="onDetails(kanji)" text-wrap>
                     <ion-avatar item-left>
                         <h1>{{ kanji.kanji }}</h1>
                     </ion-avatar>

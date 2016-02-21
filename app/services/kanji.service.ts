@@ -1,4 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
 ///<reference path="../mm/mm.d.ts" />
 ///<reference path="../config/config.d.ts" />
 
@@ -12,6 +11,8 @@ import IDiffResult = JsDiff.IDiffResult;
 import {ConfigService} from "../config/config";
 import Config = config.Config;
 import * as _ from 'lodash';
+
+var diff = require('diff/dist/diff');
 
 class KanjiKana {
     kanji:string;
@@ -58,7 +59,7 @@ export class KanjiService {
 
 
     public diff(reading:string, withKanji:string):string {
-        var diffResult:IDiffResult[] = JsDiff.diffChars(withKanji, reading);
+        var diffResult:IDiffResult[] = diff.diffChars(withKanji, reading);
         var kanjiKanaList:Array<KanjiKana|string> = [];
 
         var current:KanjiKana = new KanjiKana();

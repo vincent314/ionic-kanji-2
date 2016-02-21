@@ -18,7 +18,6 @@ export class KanjiListPage {
     }
 
     public onDetails(kanji:Kanji):void{
-        console.log(kanji.kanji);
         this.nav.push(KanjiDetailsPage,{kanji:kanji});
     }
 }
