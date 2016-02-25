@@ -10,7 +10,7 @@ declare module mm {
     kanji:string;
     meaning:string;
     writing:string;
-    readings:string[];
+    readings:Array<string>;
     vocabulary:Vocabulary[];
   }
 }

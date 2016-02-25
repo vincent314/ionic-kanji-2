@@ -3,13 +3,14 @@
 </ion-navbar>
 
 <ion-content padding class="kanji-list">
-            <ion-list can-swipe="true">
-                <ion-item *ngFor="#kanji of kanjis" (click)="onDetails(kanji)" text-wrap>
-                    <ion-avatar item-left>
-                        <h1>{{ kanji.kanji }}</h1>
-                    </ion-avatar>
-                    <p>{{ kanji.meaning }}</p>
-                    <h2>{{ kanji.readings.join(', ') }}</h2>
-                </ion-item>
-            </ion-list>
+    <ion-searchbar [(ngModel)]="searchQuery" (input)="search($event)"></ion-searchbar>
+    <ion-list can-swipe="true">
+        <ion-item *ngFor="#kanji of filtered" (click)="onDetails(kanji)" text-wrap>
+            <ion-avatar item-left>
+                <h1>{{ kanji.kanji }}</h1>
+            </ion-avatar>
+            <p>{{ kanji.meaning }}</p>
+            <h2>{{ kanji.readings.join(', ') }}</h2>
+        </ion-item>
+    </ion-list>
 </ion-content>
