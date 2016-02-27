@@ -1,0 +1,17 @@
+<ion-navbar *navbar>
+    <ion-title>テスト</ion-title>
+</ion-navbar>
+
+<ion-content padding class="tesuto">
+    <div padding>
+        <ion-segment [(ngModel)]="type">
+            <ion-segment-button value="kanji">
+                Kanji
+            </ion-segment-button>
+            <ion-segment-button value="reading">
+                Lecture
+            </ion-segment-button>
+        </ion-segment>
+    </div>
+
+</ion-content>

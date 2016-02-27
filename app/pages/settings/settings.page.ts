@@ -16,7 +16,9 @@ export class SettingsPage{
 
     showToast(message:string, position:string) {
         this.platform.ready().then(() => {
-            window.plugins.toast.show(message, "short", position);
+            if(window.plugins) {
+                window.plugins.toast.show(message, "short", position);
+            }
         });
     }
 }

@@ -7,13 +7,13 @@ import {KanjiService} from "../../services/kanji.service";
 @Page({
     templateUrl: 'build/pages/kanji-details/kanji-details.html'
 })
-export class KanjiDetailsPage{
+export class KanjiDetailsPage {
     kanji:Kanji;
-    constructor(navParams:NavParams,public kanjiService:KanjiService){
+    constructor(navParams:NavParams, public kanjiService:KanjiService) {
         this.kanji = navParams.get('kanji');
     }
 
-    public renderWithFurigana(japanese:string, reading:string):any{
-        return this.kanjiService.diff(japanese,reading);
+    public renderWithFurigana(japanese:string, reading:string):any {
+        return this.kanjiService.diff(japanese, reading);
     }
 }

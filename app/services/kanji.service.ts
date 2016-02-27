@@ -10,7 +10,7 @@ import IDiffResult = JsDiff.IDiffResult;
 import {ConfigService} from "../config/config";
 import Config = config.Config;
 import * as _ from 'lodash';
-import {Storage, LocalStorage} from "ionic-framework/ionic";
+import {Storage, SqlStorage} from "ionic-framework/ionic";
 var wanakana = require('wanakana');
 
 var diff = require('diff/dist/diff');
@@ -31,12 +31,12 @@ export class KanjiService {
         this.config = configService.getConfig();
     }
 
-    public getKanjiList():Promise<Kanji[]> {
+    public getKanjiList():Promise<Array<Kanji>> {
         //this.storage = new Storage(SqlStorage,{});
-        var storage:Storage = new Storage(LocalStorage, {});
+        var storage:Storage = new Storage(SqlStorage, {});
         return storage.get('kanji-list').then((kanjiListStr:string)=> {
             if (kanjiListStr) {
-                var kanjis:Kanji[] = JSON.parse(kanjiListStr);
+                var kanjis:Array<Kanji> = JSON.parse(kanjiListStr);
                 console.log("Kanji list found in storage (%d)", kanjis.length);
                 return new Promise((resolve)=>resolve(kanjis));
             } else {
@@ -47,7 +47,7 @@ export class KanjiService {
 
                 return new Promise((resolve)=> {
                     this.http.get(dataUrl).subscribe((res:Response)=> {
-                        var kanjis:Kanji[] = res.json();
+                        var kanjis:Array<Kanji> = res.json();
                         console.log("%d kanjis read from %s", kanjis.length, dataUrl);
                         storage.set('kanji-list', JSON.stringify(kanjis));
                         resolve(kanjis);
@@ -57,8 +57,14 @@ export class KanjiService {
         });
     }
 
+    public getRandomKanji():Promise<Kanji>{
+        return this.getKanjiList().then((kanjis:Array<Kanji>)=>{
+            return _.sample(kanjis);
+        });
+    }
+
     public static invalidCache():void {
-        new Storage(LocalStorage, {}).remove('kanji-list');
+        new Storage(SqlStorage, {}).remove('kanji-list');
     }
 
 
@@ -110,12 +116,9 @@ export class KanjiService {
             if (k.meaning.indexOf(q) > -1) {
                 return true;
             }
-            if (k.readings.filter((r:string)=> {
+            return k.readings.filter((r:string)=> {
                     return wanakana.toRomaji(r) === wanakana.toRomaji(q);
-                }).length > 0) {
-                return true;
-            }
-            return false;
+                }).length > 0;
         });
     }
 }
