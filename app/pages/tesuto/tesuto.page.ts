@@ -1,19 +1,21 @@
 import {Page} from "ionic-framework/ionic";
 import {KanjiService} from "../../services/kanji.service";
+import {mm} from "../../mm/mm";
 import Kanji = mm.Kanji;
 @Page({
-    templateUrl:'build/pages/tesuto/tesuto.html'
+    templateUrl: 'build/pages/tesuto/tesuto.html'
 })
-export class TesutoPage{
+export class TesutoPage {
     type:string;
     kanji:Kanji;
 
-    constructor(public kanjiService:KanjiService){
+    constructor(public kanjiService:KanjiService) {
         this.type = 'kanji';
+        this.updateView();
     }
 
-    public updateView(){
-        this.kanjiService.getRandomKanji().then((kanji:Kanji)=>{
+    public updateView() {
+        this.kanjiService.getRandomKanji().then((kanji:Kanji)=> {
             this.kanji = kanji;
         });
     }

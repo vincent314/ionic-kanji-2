@@ -1,5 +1,6 @@
 import {Page} from 'ionic-framework/ionic';
 import {KanjiService} from "../../services/kanji.service";
+import {mm} from "../../mm/mm";
 import Kanji = mm.Kanji;
 import {NavController} from "ionic-framework/ionic";
 import {KanjiDetailsPage} from "../kanji-details/kanji-details.page";

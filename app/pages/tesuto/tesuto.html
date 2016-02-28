@@ -14,4 +14,9 @@
         </ion-segment>
     </div>
 
+    <div *ngIf="kanji">
+        <p>{{kanji.meaning}}</p>
+        <p>{{kanji.readings.join(',')}}</p>
+    </div>
+
 </ion-content>

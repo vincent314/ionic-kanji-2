@@ -1,8 +1,8 @@
-///<reference path="../mm/mm.d.ts" />
 ///<reference path="../config/config.d.ts" />
 
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
+import {mm} from '../mm/mm';
 import Kanji = mm.Kanji;
 import {Response} from 'angular2/http';
 import {Observable} from "rxjs/Rx";
@@ -57,8 +57,8 @@ export class KanjiService {
         });
     }
 
-    public getRandomKanji():Promise<Kanji>{
-        return this.getKanjiList().then((kanjis:Array<Kanji>)=>{
+    public getRandomKanji():Promise<Kanji> {
+        return this.getKanjiList().then((kanjis:Array<Kanji>)=> {
             return _.sample(kanjis);
         });
     }
