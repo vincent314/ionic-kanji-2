@@ -5,7 +5,6 @@ import {Http} from 'angular2/http';
 import {mm} from '../mm/mm';
 import Kanji = mm.Kanji;
 import {Response} from 'angular2/http';
-import {Observable} from "rxjs/Rx";
 import IDiffResult = JsDiff.IDiffResult;
 import {ConfigService} from "../config/config";
 import Config = config.Config;
@@ -120,6 +119,7 @@ export class KanjiService {
                 return true;
             }
             return k.readings.filter((r:string)=> {
+                    r = r.replace(/（.+）/, ''); // remove verb ending
                     return wanakana.toRomaji(r) === wanakana.toRomaji(q);
                 }).length > 0;
         });

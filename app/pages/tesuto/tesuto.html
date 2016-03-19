@@ -16,7 +16,15 @@
 
     <div *ngIf="kanji">
         <p>{{kanji.meaning}}</p>
-        <p>{{kanji.readings.join(',')}}</p>
     </div>
+
+    <ion-list>
+        <ion-item>
+            <ion-input type="text" name="answer" placeholder="Réponse" [(ngModel)]="answer"></ion-input>
+            <button clear (click)="onSubmit()" item-right>
+                <ion-icon name="send"></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
 
 </ion-content>
