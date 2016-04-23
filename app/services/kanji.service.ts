@@ -16,7 +16,7 @@ import {Storage, SqlStorage} from 'ionic-angular';
 
 var wanakana = require('wanakana');
 
-// var diff = require('diff/dist/diff');
+var diff = require('diff/dist/diff');
 
 class KanjiKana {
     kanji:string;
@@ -39,7 +39,7 @@ export class KanjiService {
         var storage:Storage = new Storage(SqlStorage, {});
         return storage.get('kanji-list').then((kanjiListStr:string)=> {
             if (kanjiListStr) {
-                var kanjis:Array<Kanji> = JSON.parse(kanjiListStr).slice(1,10);
+                var kanjis:Array<Kanji> = JSON.parse(kanjiListStr);
                 console.log("Kanji list found in storage (%d)", kanjis.length);
                 return new Promise((resolve)=>resolve(kanjis));
             } else {
@@ -72,7 +72,7 @@ export class KanjiService {
 
 
     public diff(reading:string, withKanji:string):string {
-        var diffResult:IDiffResult[] = JsDiff.diffChars(withKanji, reading);
+        var diffResult:IDiffResult[] = diff.diffChars(withKanji, reading);
         var kanjiKanaList:Array<KanjiKana|string> = [];
 
         var current:KanjiKana = new KanjiKana();
