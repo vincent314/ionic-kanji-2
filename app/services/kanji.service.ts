@@ -10,10 +10,13 @@ import IDiffResult = JsDiff.IDiffResult;
 import {ConfigService} from "../config/config";
 import Config = config.Config;
 import * as _ from 'lodash';
-import {Storage, SqlStorage} from "ionic-framework/ionic";
+import {Storage, SqlStorage} from 'ionic-angular';
+
+//import wanakana from 'wanakana';
+
 var wanakana = require('wanakana');
 
-var diff = require('diff/dist/diff');
+// var diff = require('diff/dist/diff');
 
 class KanjiKana {
     kanji:string;
@@ -36,7 +39,7 @@ export class KanjiService {
         var storage:Storage = new Storage(SqlStorage, {});
         return storage.get('kanji-list').then((kanjiListStr:string)=> {
             if (kanjiListStr) {
-                var kanjis:Array<Kanji> = JSON.parse(kanjiListStr);
+                var kanjis:Array<Kanji> = JSON.parse(kanjiListStr).slice(1,10);
                 console.log("Kanji list found in storage (%d)", kanjis.length);
                 return new Promise((resolve)=>resolve(kanjis));
             } else {
@@ -69,7 +72,7 @@ export class KanjiService {
 
 
     public diff(reading:string, withKanji:string):string {
-        var diffResult:IDiffResult[] = diff.diffChars(withKanji, reading);
+        var diffResult:IDiffResult[] = JsDiff.diffChars(withKanji, reading);
         var kanjiKanaList:Array<KanjiKana|string> = [];
 
         var current:KanjiKana = new KanjiKana();

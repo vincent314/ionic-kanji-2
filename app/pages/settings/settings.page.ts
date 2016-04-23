@@ -1,6 +1,6 @@
-import {Page} from "ionic-framework/ionic";
+import {Page} from 'ionic-angular';
 import {KanjiService} from "../../services/kanji.service";
-import {Platform} from "ionic-framework/ionic";
+import {Platform} from 'ionic-angular';
 
 @Page({
     templateUrl:'build/pages/settings/settings.html'

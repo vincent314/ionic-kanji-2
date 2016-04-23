@@ -16,3 +16,5 @@ declare module wanakana{
     function isRomaji(input:string):boolean;
     function toRomaji(input:string):string;
 }
+
+declare function require(any):any;

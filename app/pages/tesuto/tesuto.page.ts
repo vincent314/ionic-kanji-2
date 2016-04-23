@@ -1,4 +1,4 @@
-import {Page} from "ionic-framework/ionic";
+import {Page} from 'ionic-angular';
 import {KanjiService} from "../../services/kanji.service";
 import {mm} from "../../mm/mm";
 import Kanji = mm.Kanji;

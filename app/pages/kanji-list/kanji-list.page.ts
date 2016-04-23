@@ -1,11 +1,11 @@
-import {Page} from 'ionic-framework/ionic';
+import {Page} from 'ionic-angular';
 import {KanjiService} from "../../services/kanji.service";
 import {mm} from "../../mm/mm";
 import Kanji = mm.Kanji;
-import {NavController} from "ionic-framework/ionic";
+import {NavController} from 'ionic-angular';
 import {KanjiDetailsPage} from "../kanji-details/kanji-details.page";
-import {Searchbar} from "ionic-framework/ionic";
-import {SearchbarInput} from "ionic-framework/ionic";
+import {Searchbar} from 'ionic-angular';
+import {SearchbarInput} from 'ionic-angular';
 import * as _ from 'lodash';
 
 @Page({

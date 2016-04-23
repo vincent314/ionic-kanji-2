@@ -1,11 +1,10 @@
-import {App, Platform} from 'ionic-framework/ionic';
+import {App, Platform} from 'ionic-angular';
+import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {KanjiService} from './services/kanji.service';
 import {ConfigService} from './config/config';
 import {HTTP_PROVIDERS} from 'angular2/http';
 
-// https://angular.io/docs/ts/latest/api/core/Type-interface.html
-import {Type} from 'angular2/core';
 
 @App({
     template: '<ion-nav [root]="rootPage"></ion-nav>',
@@ -13,24 +12,13 @@ import {Type} from 'angular2/core';
     providers: [KanjiService,HTTP_PROVIDERS,ConfigService]
 })
 export class MyApp {
-    rootPage:Type = TabsPage;
+  rootPage: any = TabsPage;
 
-    constructor(platform:Platform) {
-        platform.ready().then(() => {
-            // The platform is now ready. Note: if this callback fails to fire, follow
-            // the Troubleshooting guide for a number of possible solutions:
-            //
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            //
-            // First, let's hide the keyboard accessory bar (only works natively) since
-            // that's a better default:
-            //
-            // Keyboard.setAccessoryBarVisible(false);
-            //
-            // For example, we might change the StatusBar color. This one below is
-            // good for dark backgrounds and light text:
-            // StatusBar.setStyle(StatusBar.LIGHT_CONTENT)
-        });
-    }
+  constructor(platform: Platform) {
+    platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      StatusBar.styleDefault();
+    });
+  }
 }
