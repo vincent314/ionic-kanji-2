@@ -1,9 +1,7 @@
 import {Page} from "ionic-angular";
-import {mm} from "../../mm/mm";
-import {Input} from "angular2/core";
 import {NavParams} from "ionic-angular";
 import {KanjiService} from "../../services/kanji.service";
-import Kanji = mm.Kanji;
+import {Kanji} from '../../mm/mm';
 
 @Page({
     templateUrl: 'build/pages/kanji-details/kanji-details.html'

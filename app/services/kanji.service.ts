@@ -2,16 +2,13 @@
 
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
-import {mm} from '../mm/mm';
-import Kanji = mm.Kanji;
+import {Kanji} from '../mm/mm';
 import {Response} from 'angular2/http';
 import IDiffResult = JsDiff.IDiffResult;
 import {ConfigService} from "../config/config";
 import Config = config.Config;
 import * as _ from 'lodash';
 import {Storage, SqlStorage} from 'ionic-angular';
-
-//import wanakana from 'wanakana';
 
 var wanakana = require('wanakana');
 

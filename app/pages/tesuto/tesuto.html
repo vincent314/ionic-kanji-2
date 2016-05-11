@@ -4,7 +4,7 @@
 
 <ion-content padding class="tesuto">
     <div padding>
-        <ion-segment [(ngModel)]="type">
+        <ion-segment [(ngModel)]="type" (change)="onSegmentChange($event)">
             <ion-segment-button value="kanji">
                 Kanji
             </ion-segment-button>
@@ -15,16 +15,14 @@
     </div>
 
     <div *ngIf="kanji">
-        <p>{{kanji.meaning}}</p>
+        <div [ngSwitch]="type">
+            <template ngSwitchWhen="kanji">
+               <test-kanji [kanji]="kanji"></test-kanji>
+            </template>
+            <template ngSwitchWhen="reading">
+                <test-reading [kanji]="kanji"></test-reading>
+            </template>
+        </div>
     </div>
-
-    <ion-list>
-        <ion-item>
-            <ion-input type="text" name="answer" placeholder="Réponse" [(ngModel)]="answer"></ion-input>
-            <button clear (click)="onSubmit()" item-right>
-                <ion-icon name="send"></ion-icon>
-            </button>
-        </ion-item>
-    </ion-list>
 
 </ion-content>

@@ -1,12 +1,11 @@
 import {Page} from 'ionic-angular';
 import {KanjiService} from "../../services/kanji.service";
-import {mm} from "../../mm/mm";
-import Kanji = mm.Kanji;
 import {NavController} from 'ionic-angular';
 import {KanjiDetailsPage} from "../kanji-details/kanji-details.page";
 import {Searchbar} from 'ionic-angular';
 import {SearchbarInput} from 'ionic-angular';
 import * as _ from 'lodash';
+import {Kanji} from '../../mm/mm';
 
 @Page({
     templateUrl: 'build/pages/kanji-list/kanji-list.html',
@@ -29,7 +28,7 @@ export class KanjiListPage {
         this.nav.push(KanjiDetailsPage, {kanji: kanji});
     }
 
-    public search(searchbar) {
+    public search(searchbar:Searchbar) {
         this.filtered = this.kanjiService.search(this.kanjis, searchbar.value);
     }
 }
